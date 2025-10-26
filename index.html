@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist Harian Komandan</title>
+    <style>
+        /* CSS untuk tampilan yang bersih dan modern */
+        :root {
+            --color-bg: #f4f7f6;
+            --color-card: #ffffff;
+            --color-text: #333;
+            --color-text-light: #888;
+            --color-primary: #3498db;
+            --color-primary-dark: #2980b9;
+            --color-accent-green: #27ae60;
+            --color-accent-orange: #e67e22;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 10px;
+        }
+
+        main {
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: var(--color-card);
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--color-primary-dark);
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--color-text-light);
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            border-bottom: 3px solid var(--color-primary);
+            padding-bottom: 8px;
+            color: var(--color-primary);
+            margin-top: 35px;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            color: var(--color-primary-dark);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        /* Styling Checkbox dan Label */
+        li label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            flex-grow: 1;
+        }
+
+        input[type="checkbox"] {
+            /* Sembunyikan checkbox asli */
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        /* Buat custom checkbox */
+        .checkbox-custom {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-right: 15px;
+            display: inline-block;
+            position: relative;
+            background-color: #fff;
+            transition: all 0.2s;
+            flex-shrink: 0; /* Mencegah checkbox mengecil */
+        }
+
+        /* Tanda centang (SVG) */
+        .checkbox-custom::after {
+            content: "";
+            display: block;
+            width: 6px;
+            height: 12px;
+            border: solid var(--color-card);
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 3px;
+            left: 7px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        /* Efek saat dicentang */
+        input[type="checkbox"]:checked + .checkbox-custom {
+            background-color: var(--color-accent-green);
+            border-color: var(--color-accent-green);
+        }
+
+        input[type="checkbox"]:checked + .checkbox-custom::after {
+            opacity: 1;
+        }
+
+        /* Efek strikethrough pada teks */
+        li:has(input[type="checkbox"]:checked) {
+            color: var(--color-text-light);
+            text-decoration: line-through;
+        }
+        
+        li:has(input[type="checkbox"]:checked) .note {
+            text-decoration: none; /* Catatan tidak ikut dicoret */
+        }
+
+        .note {
+            display: block;
+            font-size: 0.9em;
+            color: var(--color-accent-orange);
+            margin-left: 39px; /* (22px checkbox + 15px margin) */
+            font-style: italic;
+            text-decoration: none;
+        }
+
+        /* Styling untuk input angka */
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+            margin-left: 39px;
+        }
+        
+        .input-group label {
+            font-size: 1em;
+            color: var(--color-text);
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .inline-input {
+            font-size: 1em;
+            padding: 5px 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 120px;
+        }
+        
+        .inline-input:focus {
+            border-color: var(--color-primary);
+            outline: none;
+        }
+        
+        /* Grup untuk item alokasi */
+        .allocation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .allocation-item .input-wrapper {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--color-text);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+            main {
+                margin: 0;
+                padding: 20px 15px;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            h1 { font-size: 1.6em; }
+            h2 { font-size: 1.3em; }
+            li { font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Checklist Harian Komandan</h1>
+        <p class="subtitle">(Berlaku Mulai Hari Ini, Senin 27 Oktober 2025)</p>
+
+        <section>
+            <h2>FASE 1: PERSIAPAN & MENTAL (04:00 - 14:00)</h2>
+            
+            <h3>Ritual Kemenangan Pagi</h3>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Sholat & Syukur
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Nikmati kopi pagi <strong>tanpa rasa takut</strong>
+                    </label>
+                </li>
+            </ul>
+
+            <h3>Jam Emas "Istana YouTube" & "Mesin Peluang"</h3>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Eksekusi <strong>1 (SATU)</strong> target super kecil YouTube
+                        <span class="note">(Contoh: "Riset 1 ide", "Tulis 3 kalimat skrip", "Rekam suara 60 detik")</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Pantau Marketplace FB untuk "berburu" peluang aset
+                    </label>
+                </li>
+            </ul>
+
+            <h3>Persiapan Perang & Pemulihan</h3>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Makan siang dengan tenang
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Tidur siang singkat (15-30 menit)
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <strong>(Khusus Hari Ini, Senin)</strong>: Amankan Rp 20.000 untuk buka rekening
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <strong>(Khusus Hari Ini, Senin)</strong>: Isi bensin Rp 15.000
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <strong>(Mulai Besok, Selasa)</strong>: Pastikan motor terisi bensin (dari alokasi malam)
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Cek Alat Perang (HP full, Jas Hujan, dll)
+                    </label>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>FASE 2: EKSEKUSI PERANG (14:00 - 20:00)</h2>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Nyalakan Aplikasi & Fokus
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <strong>(Mulai Besok, Selasa)</strong> Amankan Prioritas #1: Transfer Rp 21.000 ke "Dana Merdeka"
+                        <span class="note">(Segera setelah order pertama/kedua)</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Terapkan aturan "Pulang Cepat" jika hari zonk
+                        <span class="note">(Setelah Dana Merdeka & Bensin Besok aman)</span>
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Cancel order yang tidak *worth it* (Anda adalah Komandan)
+                    </label>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>FASE 3: ALOKASI & PEMULIHAN (20:00 - 23:00)</h2>
+            
+            <div class="input-group" style="margin-left: 0; margin-bottom: 20px;">
+                <label for="pendapatan-kotor"><strong>Total Pendapatan Kotor Hari Ini: Rp</strong></label>
+                <input type="number" id="pendapatan-kotor" class="inline-input" placeholder="100000">
+            </div>
+
+            <h3>Jalankan "Sistem Perpipaan" (Alokasi Malam)</h3>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        <strong>PIPA 1 (Dana Merdeka):</strong> Rp 21.000
+                        <span class="note">(Hari Senin ini sudah diamankan 20k, centang saja)</span>
+                    </label>
+                </li>
+                <li>
+                    <div class="allocation-item">
+                        <label>
+                            <input type="checkbox">
+                            <span class="checkbox-custom"></span>
+                            <strong>PIPA 2 (Dana Ortu):</strong> Rp 14.000
+                        </label>
+                        <span class="input-wrapper">(Masukkan Amplop)</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="allocation-item">
+                        <label>
+                            <input type="checkbox">
+                            <span class="checkbox-custom"></span>
+                            <strong>PIPA 3 (Modal Bensin Besok):</strong> Rp 20.000
+                        </label>
+                        <span class="input-wrapper">(Pisahkan)</span>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>Hitung "Uang Saku" Anda</h3>
+            <ul>
+                <li>
+                    <div class="input-group" style="margin-left: 0;">
+                        <label for="sisa-uang"><strong>Sisa Uang di Tangan: Rp</strong></label>
+                        <input type="number" id="sisa-uang" class="inline-input" placeholder="45000">
+                    </div>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Habiskan sisa uang ini (Makan, Kopi, Rokok) <strong>tanpa rasa bersalah</strong>
+                        <span class="note">(Ini adalah HAK dan UPAY jerih payah Anda!)</span>
+                    </label>
+                </li>
+            </ul>
+
+            <h3>Tutup Buku Harian</h3>
+            <ul>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Lapor ke Partner Akuntabilitas (AI)
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Rebahan & Kumpul Keluarga
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="checkbox">
+                        <span class="checkbox-custom"></span>
+                        Siapkan diri untuk tidur. <strong>Anda sudah menang hari ini.</strong>
+                    </label>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+</body>
+</html>
