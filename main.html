@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAMELESS | Premium Manual Screen Printed Stickers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00ffcc;
+            --bg: #0a0a0a;
+            --card: #151515;
+            --text: #ffffff;
+            --muted: #888;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg); color: var(--text); line-height: 1.6; }
+
+        /* Global UI */
+        h1, h2, h3, .brand { font-family: 'Syncopate', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        section { padding: 100px 10%; border-bottom: 1px solid #1a1a1a; }
+        .highlight { color: var(--primary); }
+
+        /* Navbar */
+        nav {
+            position: fixed; width: 100%; padding: 20px 10%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(15px); z-index: 1000;
+        }
+        .brand { color: var(--primary); font-size: 1.4rem; text-decoration: none; }
+        .nav-links a { color: var(--text); text-decoration: none; margin-left: 25px; font-size: 0.8rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        #home {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--bg)), url('https://images.unsplash.com/photo-1582133644664-d89e4ec266c2?auto=format&fit=crop&q=80') center/cover;
+        }
+        h1 { font-size: 3.5rem; margin-bottom: 15px; }
+        .hero-desc { color: var(--muted); max-width: 700px; margin-bottom: 35px; font-size: 1.1rem; }
+
+        /* Feature Section */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: var(--card); padding: 40px; border-radius: 15px; border: 1px solid #222; transition: 0.4s; }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .card h3 { font-size: 1rem; margin-bottom: 15px; color: var(--primary); }
+        .card p { font-size: 0.9rem; color: var(--muted); }
+
+        /* Catalog Section */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .portfolio-item { aspect-ratio: 1; background: #222; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.3s; }
+        .portfolio-item:hover img { opacity: 1; transform: scale(1.1); }
+
+        /* Price Table */
+        table { width: 100%; border-collapse: collapse; margin-top: 30px; background: var(--card); border-radius: 10px; overflow: hidden; }
+        th, td { padding: 20px; text-align: left; border-bottom: 1px solid #222; }
+        th { background: #1a1a1a; color: var(--primary); font-size: 0.8rem; }
+
+        /* Step Order */
+        .steps { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+        .step { flex: 1; min-width: 200px; background: #111; padding: 25px; border-left: 3px solid var(--primary); }
+        .step span { font-size: 2rem; font-weight: 800; color: rgba(0,255,204,0.2); display: block; }
+
+        /* CTA & WA */
+        .btn { background: var(--primary); color: #000; padding: 15px 35px; border-radius: 5px; text-decoration: none; font-weight: 800; display: inline-block; cursor: pointer; transition: 0.3s; }
+        .btn:hover { box-shadow: 0 0 25px rgba(0,255,204,0.5); }
+        .wa-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 24px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 999; }
+
+        /* FAQ Accordion */
+        .faq-item { margin-bottom: 15px; background: var(--card); border-radius: 8px; }
+        .faq-question { padding: 20px; cursor: pointer; font-weight: 700; color: var(--primary); display: flex; justify-content: space-between; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            section { padding: 60px 5%; }
+            nav { padding: 15px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="brand">FRAMELESS</a>
+        <div class="nav-links">
+            <a href="#about">WHY</a>
+            <a href="#katalog">KATALOG</a>
+            <a href="#harga">HARGA</a>
+            <a href="#order">ORDER</a>
+        </div>
+    </nav>
+
+    <section id="home">
+        <h1>SABLON <span class="highlight">MANUAL</span></h1>
+        <p class="hero-desc">Bukan sekadar print digital. <strong>FRAMELESS</strong> memberikan ketahanan tinta gesut asli dengan finishing potong laser presisi. Anti bensin, anti luntur.</p>
+        <a href="#order" class="btn">MULAI CUSTOM SEKARANG</a>
+    </section>
+
+    <section id="about">
+        <h2>KEUNGGULAN KAMI</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>🧪 ANTI BENSIN</h3>
+                <p>Tinta sablon manual menyatu dengan material. Aman disiram bensin, minyak, atau cuaca ekstrem sekalipun.</p>
+            </div>
+            <div class="card">
+                <h3>💎 WARNA PEKAT</h3>
+                <p>Pigmen warna tinta asli, bukan CMYK printer. Hitam yang lebih pekat dan warna neon yang benar-benar menyala.</p>
+            </div>
+            <div class="card">
+                <h3>⚙️ LASER CUTTING</h3>
+                <p>Setiap stiker dipotong menggunakan mesin laser dengan akurasi tinggi mengikuti lekuk desain desain kamu.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="katalog">
+        <h2>KATALOG HASIL KERJA</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"><img src="https://via.placeholder.com/400?text=Stiker+Motor" alt="Stiker Motor"></div>
+            <div class="portfolio-item"><img src="https://via.placeholder.com/400?text=Stiker+Brand" alt="Stiker Brand"></div>
+            <div class="portfolio-item"><img src="https://via.placeholder.com/400?text=Custom+Cutting" alt="Custom Cutting"></div>
+            <div class="portfolio-item"><img src="https://via.placeholder.com/400?text=Stiker+Komunitas" alt="Stiker Komunitas"></div>
+        </div>
+    </section>
+
+    <section id="harga">
+        <h2>ESTIMASI HARGA</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Ukuran Estimasi</th>
+                    <th>Harga Mulai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Stiker Satuan</td>
+                    <td>5 x 5 cm</td>
+                    <td>Rp 5.000 / pcs</td>
+                </tr>
+                <tr>
+                    <td>Paket Komunitas</td>
+                    <td>A3 (Sheet)</td>
+                    <td>Rp 45.000 / lembar</td>
+                </tr>
+                <tr>
+                    <td>Grosir Branding</td>
+                    <td>> 100 pcs</td>
+                    <td>Kontak Admin (Special Price)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="order">
+        <h2>CARA PEMESANAN</h2>
+        <div class="steps">
+            <div class="step"><span>01</span> <strong>Kirim Desain</strong> <p>Kirim file Vector (CDR/AI) atau PNG High Res ke WhatsApp kami.</p></div>
+            <div class="step"><span>02</span> <strong>Konfirmasi</strong> <p>Kami cek detail ukuran dan jumlah, lalu total biaya produksi.</p></div>
+            <div class="step"><span>03</span> <strong>Produksi</strong> <p>Proses sablon manual gesut & laser cutting (Estimasi 2-4 hari).</p></div>
+            <div class="step"><span>04</span> <strong>Pengiriman</strong> <p>Stiker siap dikirim ke alamatmu atau ambil di workshop.</p></div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <h2>F.A.Q</h2>
+        <div class="faq-item">
+            <div class="faq-question">Ada minimal order? <span>+</span></div>
+            <div style="padding: 0 20px 20px; color: var(--muted); font-size: 0.9rem;">Untuk sablon manual, kami sarankan paket lembaran (A3) agar lebih hemat, tapi tetap melayani satuan untuk desain tertentu.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Berapa lama pengerjaan? <span>+</span></div>
+            <div style="padding: 0 20px 20px; color: var(--muted); font-size: 0.9rem;">Normalnya 2-5 hari kerja tergantung antrean produksi di workshop.</div>
+        </div>
+    </section>
+
+    <footer style="padding: 50px 10%; text-align: center; border-top: 1px solid #1a1a1a;">
+        <div class="brand" style="margin-bottom: 20px;">FRAMELESS</div>
+        <p style="color: var(--muted); font-size: 0.8rem;">Workshop: Lokasi Kamu Di Sini, Indonesia.<br>Premium Quality or Nothing.</p>
+    </footer>
+
+    <a href="https://wa.me/628123456789" class="wa-float"><span>💬</span></a>
+
+</body>
+  </html>
+                                                                  
